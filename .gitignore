@@ -62,3 +62,7 @@ typings/
 
 # built files
 dist/
+
+# Jekyll
+demo-site/_site/
+demo-site/dist/
