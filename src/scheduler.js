@@ -27,9 +27,10 @@ class Header extends React.Component {
   }
   render() {
     // console.log('rendering header')
+    let droppable = (typeof this.props.onEventDrop === 'function')
 
     let AfterZoneClass = AfterZone
-    if (this.props.customDropTypes.length > 0) {
+    if (droppable && this.props.customDropTypes.length > 0) {
       AfterZoneClass = CustomAfterZone(this.props.customDropTypes)
     }
 
