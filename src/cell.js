@@ -2,7 +2,7 @@ import React from 'react'
 import { activeTime } from 'event-time-utils'
 import {shallowEqual, shallowEqualExcept, shallowItemsDifferExcept} from 'shallow-utils'
 
-import Event from './event.js'
+import { Event, DraggableEvent } from './event.js'
 import {
   AfterZone,
   CustomAfterZone,
@@ -42,26 +42,34 @@ class Cell extends React.Component {
   }
   render() {
     // console.log('rendering cell')
+    let droppable = (typeof this.props.onEventDrop === 'function')
     let AfterZoneClass = AfterZone
-    if (this.props.customDropTypes.length > 0) {
+    if (droppable && this.props.customDropTypes.length > 0) {
       AfterZoneClass = CustomAfterZone(this.props.customDropTypes)
     }
 
     let intBegins = +this.props.interval.begins
     let intEnds = +this.props.interval.ends
 
+    let EventClass = Event
+    if (droppable) {
+      EventClass = DraggableEvent
+    }
+
+    const ends = intBegins + this.props.beginsOffset
+
     return (
       <div
         className="rbucks-cell"
       >
         <AfterZoneClass
-          ends={intBegins + this.props.beginsOffset}
+          ends={ends}
           long={true}
           rowData={this.props.rowData}
         />
         {this.props.events.map((event) => {
           return (
-            <Event
+            <EventClass
               key={`event-${event.id}`}
               intervalBegins={intBegins}
               intervalEnds={intEnds}
@@ -69,11 +77,14 @@ class Cell extends React.Component {
               customDropTypes={this.props.customDropTypes}
               onClick={this.props.onEventClick}
               onDrop={this.props.onEventDrop}
+              dropMargin={this.props.dropMargin}
               {...event}
             />
           )
         })}
-        <span className="rbucks-label">{activeTime(this.props.events, intBegins, intEnds)}h</span>
+        {this.props.showActiveTime && (
+          <span className="rbucks-label">{activeTime(this.props.events, intBegins, intEnds)}h</span>
+        )}
       </div>
     )
   }

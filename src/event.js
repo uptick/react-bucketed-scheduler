@@ -37,6 +37,9 @@ function collect(connect, monitor) {
 }
 
 class Event extends React.Component {
+  static defaultProps = {
+    extraClasses: [],
+  }
   shouldComponentUpdate(nextProps, nextState) {
     if (!shallowEqual(this.props.customDropTypes, nextProps.customDropTypes)) {
       // console.log('customDropTypes changed')
@@ -68,6 +71,7 @@ class Event extends React.Component {
   }
   render() {
     // console.log('rendering event')
+    let droppable = (typeof this.props.onDrop === 'function')
     let begins = Math.max(this.props.begins, this.props.intervalBegins)
     let ends = Math.min(this.props.ends, this.props.intervalEnds)
     let timeFormat = 'h:mm a'
@@ -84,24 +88,30 @@ class Event extends React.Component {
     let zoneProps = {}
     zoneProps.rowData = this.props.rowData
 
+    let location
+    if (this.props.location) {
+      location = (<p className="location">{this.props.location}</p>)
+    }
+
     let event = (
       <div
         className={classNames('rbucks-event', {
           'dragging': this.props.isDragging,
           'disabled': this.props.disabled,
-        })}
+          'clickable': typeof this.props.onClick === 'function',
+        }, this.props.extraClasses)}
         onClick={this.handleClick}
       >
-        {!this.props.disabled && !this.props.isDragging && (
+        {droppable && !this.props.disabled && !this.props.isDragging && (
           <BeforeZoneClass
-            begins={this.props.begins}
+            begins={this.props.begins - this.props.dropMargin}
             top={true}
             {...zoneProps}
           />
         )}
-        {!this.props.disabled && !this.props.isDragging && (
+        {droppable && !this.props.disabled && !this.props.isDragging && (
           <AfterZoneClass
-            ends={this.props.ends}
+            ends={this.props.ends + this.props.dropMargin}
             bottom={true}
             {...zoneProps}
           />
@@ -109,15 +119,19 @@ class Event extends React.Component {
         {this.props.connectPreview(<div className="rbucks-content">
           <p className="rbucks-label">{moment(begins, 'x').format(timeFormat)} - {moment(ends, 'x').format(timeFormat)}</p>
           <p>{this.props.title}</p>
+          {location}
         </div>)}
       </div>
     )
-    if (!this.props.disabled) {
+    if (droppable && !this.props.disabled) {
       event = this.props.connectSource(event)
     }
     return event
   }
 }
-Event = DragSource('RBUCKS_EVENT', source, collect)(Event)
+const DraggableEvent = DragSource('RBUCKS_EVENT', source, collect)(Event)
 
-export default Event
+export {
+  Event,
+  DraggableEvent,
+}
