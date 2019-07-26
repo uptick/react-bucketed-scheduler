@@ -106,6 +106,8 @@ class Scheduler extends React.Component {
         customDropTypes: this.props.customDropTypes,
         onEventDrop: this.props.onEventDrop,
         onEventClick: this.props.onEventClick,
+        showActiveTime: this.props.showActiveTime,
+        dropMargin: this.props.dropMargin,
       }))
     })
     return (
@@ -117,6 +119,7 @@ class Scheduler extends React.Component {
           beginsOffset={this.props.headerBeginsOffset}
           customDropTypes={this.props.customDropTypes}
           rowData={this.props.headerRowData}
+          onEventDrop={this.props.onEventDrop}
         >
           {corners}
         </Header>
@@ -137,6 +140,7 @@ Scheduler.defaultProps = {
   customDropTypes: [],
   headerRowData: {},
   headerBeginsOffset: 0,
+  dropMargin: 0,
 }
 
 export default Scheduler
