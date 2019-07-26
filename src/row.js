@@ -64,7 +64,9 @@ class Row extends React.Component {
             {'title' in this.props && (
               <h2>{this.props.title}</h2>
             )}
-            <span className="rbucks-label">{activeTime(this.props.events, rangeStart, rangeEnd)}h</span>
+            {this.props.showActiveTime && (
+              <span className="rbucks-label">{activeTime(this.props.events, rangeStart, rangeEnd)}h</span>
+            )}
           </div>
         )}
         {this.props.intervals.map((interval) => {
@@ -82,6 +84,8 @@ class Row extends React.Component {
               customDropTypes={this.props.customDropTypes}
               onEventClick={this.onEventClick}
               onEventDrop={this.props.onEventDrop}
+              showActiveTime={this.props.showActiveTime}
+              dropMargin={this.props.dropMargin}
             />
           )
         })}
