@@ -46,11 +46,13 @@ class Header extends React.Component {
               className="rbucks-cell"
               key={`interval-${+interval.begins}`}
             >
-              <AfterZoneClass
-                ends={intBegins + this.props.beginsOffset}
-                long={true}
-                rowData={this.props.rowData}
-              />
+              {droppable && (
+                <AfterZoneClass
+                  ends={intBegins + this.props.beginsOffset}
+                  long={true}
+                  rowData={this.props.rowData}
+                />
+              )}
               <h3>{moment(interval.begins, 'x').format(this.props.titleFormat)}</h3>
             </div>
           )
@@ -130,6 +132,7 @@ class Scheduler extends React.Component {
 }
 Scheduler.defaultProps = {
   showTitles: true,
+  showActiveTime: true,
   headerTitleFormat: 'ddd',
   onEventDrop: function(event, rowData, dropData) {
     console.log('RBuckS: dropped rbucks event', event, 'at', rowData, dropData)

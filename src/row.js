@@ -9,9 +9,6 @@ import {
 import Cell from './cell.js'
 
 class Row extends React.Component {
-  onEventClick = (event) => {
-    this.props.onEventClick(event)
-  }
   shouldComponentUpdate(nextProps, nextState) {
     if (!shallowEqual(this.props.events, nextProps.events)) {
       // console.log('events changed')
@@ -82,7 +79,7 @@ class Row extends React.Component {
               events={events}
               beginsOffset={this.props.beginsOffset}
               customDropTypes={this.props.customDropTypes}
-              onEventClick={this.onEventClick}
+              onEventClick={this.props.onEventClick}
               onEventDrop={this.props.onEventDrop}
               showActiveTime={this.props.showActiveTime}
               dropMargin={this.props.dropMargin}

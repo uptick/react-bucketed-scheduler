@@ -62,11 +62,13 @@ class Cell extends React.Component {
       <div
         className="rbucks-cell"
       >
-        <AfterZoneClass
-          ends={ends}
-          long={true}
-          rowData={this.props.rowData}
-        />
+        {droppable && (
+          <AfterZoneClass
+            ends={ends}
+            long={true}
+            rowData={this.props.rowData}
+          />
+        )}
         {this.props.events.map((event) => {
           return (
             <EventClass
