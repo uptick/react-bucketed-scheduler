@@ -62,7 +62,9 @@ class Event extends React.Component {
     if (event) {
       event.preventDefault()
     }
-    this.props.onClick(this.props.eventData)
+    if (typeof this.props.onClick === 'function') {
+      this.props.onClick(this.props.eventData)
+    }
   }
   render() {
     // console.log('rendering event')
