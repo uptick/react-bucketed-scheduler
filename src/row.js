@@ -49,11 +49,6 @@ class Row extends React.Component {
       rangeEnd = +this.props.intervals[this.props.intervals.length - 1].ends
     }
 
-    let AfterZoneClass = AfterZone
-    if (this.props.customDropTypes.length > 0) {
-      AfterZoneClass = CustomAfterZone(this.props.customDropTypes)
-    }
-
     return (
       <div className="rbucks-row">
         {this.props.showTitle && (
