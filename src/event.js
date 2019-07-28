@@ -96,19 +96,23 @@ class Event extends React.Component {
       >
         <p className="rbucks-label">
           {moment(begins, 'x').format(timeFormat)} - {moment(ends, 'x').format(timeFormat)}
-          <p>{this.props.title}</p>
-          {location}
         </p>
-        <div
-          className={classNames('rbucks-event', {
-            'dragging': this.props.isDragging,
-            'disabled': this.props.disabled,
-            'clickable': typeof this.props.onClick === 'function',
-          }, this.props.extraClasses)}
-          onClick={this.handleClick}
-        >
-          
-        </div>
+        <p>{this.props.title}</p>
+        {location}
+      </div>
+    )
+    if (droppable) {
+      event = this.props.connectPreview(event)
+    }
+    let container = (
+      <div
+        className={classNames('rbucks-event', {
+          'dragging': this.props.isDragging,
+          'disabled': this.props.disabled,
+          'clickable': typeof this.props.onClick === 'function',
+        }, this.props.extraClasses)}
+        onClick={this.handleClick}
+      >
         {droppable && !this.props.disabled && !this.props.isDragging && (
           <BeforeZoneClass
             begins={this.props.begins - this.props.dropMargin}
@@ -123,12 +127,13 @@ class Event extends React.Component {
             {...zoneProps}
           />
         )}
+        {event}
       </div>
     )
     if (droppable && !this.props.disabled) {
-      event = this.props.connectSource(event)
+      container = this.props.connectSource(container)
     }
-    return event
+    return container
   }
 }
 Event.defaultProps = {
