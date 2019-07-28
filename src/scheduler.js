@@ -96,7 +96,7 @@ class Scheduler extends React.Component {
   }
   render() {
     const corners = []
-    const children = []
+    let children = []
     React.Children.map(this.props.children, (child) => {
       if (child.type === Corner) {
         corners.push(child)
@@ -112,6 +112,9 @@ class Scheduler extends React.Component {
         dropMargin: this.props.dropMargin,
       }))
     })
+    if (children.length == 1) {
+      children = children[0]
+    }
     return (
       <div className="rbucks-root">
         <Header
