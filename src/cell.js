@@ -56,8 +56,11 @@ class Cell extends React.Component {
       EventClass = DraggableEvent
     }
 
-    const ends = intBegins + this.props.beginsOffset
-
+    let ends = intBegins + this.props.beginsOffset
+    this.props.events.map((event) => {
+      var eventEnds = +event.ends + this.props.dropMargin
+      eventEnds > intEnds || eventEnds > ends && (ends = eventEnds)
+    })
     return (
       <div
         className="rbucks-cell"
