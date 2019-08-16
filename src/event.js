@@ -93,6 +93,7 @@ class Event extends React.Component {
     let event = (
       <div
         className="rbucks-content"
+        style={this.props.style}
       >
         <p className="rbucks-label">
           {moment(begins, 'x').format(timeFormat)} - {moment(ends, 'x').format(timeFormat)}
