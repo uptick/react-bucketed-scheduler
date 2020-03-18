@@ -92,8 +92,8 @@ class Event extends React.Component {
 
     // Allow notes to be added when this is an attribute of the event
     let notes
-    if (this.props.notes) {
-      notes = (<p><em>{this.props.notes}</em></p>)
+    if (this.props.eventData && this.props.eventData.attributes && this.props.eventData.attributes.notes) {
+      notes = (<p><em>{this.props.eventData.attributes.notes}</em></p>)
     }
 
     let event = (
