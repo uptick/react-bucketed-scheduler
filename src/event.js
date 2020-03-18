@@ -90,6 +90,12 @@ class Event extends React.Component {
       location = (<p className="location">{this.props.location}</p>)
     }
 
+    // Allow notes to be added when this is an attribute of the event
+    let notes
+    if (this.props.notes) {
+      notes = (<p><em>{this.props.notes}</em></p>)
+    }
+
     let event = (
       <div
         className="rbucks-content"
@@ -100,6 +106,7 @@ class Event extends React.Component {
         </p>
         <p>{this.props.title}</p>
         {location}
+        {notes}
       </div>
     )
     if (droppable) {
