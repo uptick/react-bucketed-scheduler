@@ -1,6 +1,6 @@
 {
   "name": "react-bucketed-scheduler",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Scheduler with events listed (not to scale), grouped into bucketed drop zones",
   "main": "index.js",
   "scripts": {
