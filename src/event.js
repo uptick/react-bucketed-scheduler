@@ -96,15 +96,22 @@ class Event extends React.Component {
       notes = (<p><em>{this.props.eventData.attributes.notes}</em></p>)
     }
 
+    const moment_begins = moment(begins, 'x')
+    const moment_ends = moment(ends, 'x')
+    if (this.props.timezone) {
+      moment_begins.tz(this.props.timezone)
+      moment_ends.tz(this.props.timezone)
+    }
+
     let event = (
       <div
         className="rbucks-content"
         style={this.props.style}
       >
-        <div className="rbucks-label">
-          {moment(begins, 'x').format(timeFormat)} - {moment(ends, 'x').format(timeFormat)}
-        </div>
-        <div className="title">{this.props.title}</div>
+        <p className="rbucks-label">
+          {moment_begins.format(timeFormat)} - {moment_ends.format(timeFormat)}
+        </p>
+        <p>{this.props.title}</p>
         {location}
         {notes}
       </div>
