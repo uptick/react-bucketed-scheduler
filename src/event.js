@@ -101,10 +101,10 @@ class Event extends React.Component {
         className="rbucks-content"
         style={this.props.style}
       >
-        <p className="rbucks-label">
+        <div className="rbucks-label">
           {moment(begins, 'x').format(timeFormat)} - {moment(ends, 'x').format(timeFormat)}
-        </p>
-        <p>{this.props.title}</p>
+        </div>
+        <div className="title">{this.props.title}</div>
         {location}
         {notes}
       </div>
