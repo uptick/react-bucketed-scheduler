@@ -78,6 +78,7 @@ class Row extends React.Component {
               onEventDrop={this.props.onEventDrop}
               showActiveTime={this.props.showActiveTime}
               dropMargin={this.props.dropMargin}
+              timezone={this.props.timezone}
             />
           )
         })}

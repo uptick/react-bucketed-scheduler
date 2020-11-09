@@ -83,6 +83,7 @@ class Cell extends React.Component {
               onClick={this.props.onEventClick}
               onDrop={this.props.onEventDrop}
               dropMargin={this.props.dropMargin}
+              timezone={this.props.timezone}
               {...event}
             />
           )
