@@ -1,14 +1,13 @@
-$event-colour: #34495e
-$item-margins: 0.25rem
-$border: 1px solid #ddd
-$hoverover-colour: #5bc0de
+$event-colour = #34495e
+$item-margins = 0.25rem
+$border = 1px solid #dddddd
+$hoverover-colour = #5bc0de
 
 div.rbucks-root
   font-size: 1.1rem
   h2, h3
     font-size: 1.1rem
     line-height: 1.5em
-
   overflow-x: hidden
   div.rbucks-row
     display: flex
@@ -53,7 +52,7 @@ div.rbucks-root
           padding: 0 0.5rem
   div.rbucks-row:not(.rbucks-header) div.rbucks-cell
     padding-top: $item-margins
-    padding-bottom: 1.6rem + $item-margins
+    padding-bottom: (1.6rem + $item-margins)
   div.rbucks-cell
     position: relative
     > .rbucks-label
@@ -82,9 +81,8 @@ div.rbucks-root
     .long
       height: 100%
       top: 0
-
-    $active-grad-start: 0.75
-    $active-line-width: 3px
+    $active-grad-start = 0.75
+    $active-line-width = 3px
     .before.active:not(.long)
       border-top: $active-line-width solid $hoverover-colour
       background: linear-gradient(rgba($hoverover-colour, $active-grad-start), rgba($hoverover-colour, 0))
@@ -94,7 +92,6 @@ div.rbucks-root
     .active.long
       background: rgba($hoverover-colour, $active-grad-start / 2)
       border: $active-line-width / 2 solid $hoverover-colour
-
   div.rbucks-event
     &.clickable:not(.disabled)
       cursor: pointer
@@ -103,15 +100,13 @@ div.rbucks-root
       z-index: 3
     &.disabled
       opacity: 0.5
-
   div.rbucks-event.dragging
     div.rbucks-content
       visibility: hidden
-
   div.rbucks-content
-    margin: ($item-margins / 2) ($item-margins * 2)
+    margin: $item-margins / 2 $item-margins * 2
     background: $event-colour
-    color: #fff
+    color: white
     padding: 0.5rem
     font-size: 0.8rem
     line-height: 1.1em
@@ -124,9 +119,9 @@ div.rbucks-root
         margin-bottom: 0.5rem
       &.location
         white-space: pre-wrap
-        color: #ddd
+        color: #dddddd
   .rbucks-label
-    color: #888
+    color: #888888
     font-size: 0.8rem
   div.rbucks-content .rbucks-label
-    color: #ccc
+    color: #cccccc
